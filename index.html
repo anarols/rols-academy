@@ -747,59 +747,54 @@
 
   .achip{ font-family:var(--mono); font-size:9.5px; letter-spacing:.06em; text-transform:uppercase; background:rgba(51,58,60,.08); color:var(--muted); border-radius:4px; padding:3px 7px; }
 
-  /* ===== hero estilo home: titular izquierda + imagen grande derecha, alineado abajo ===== */
-  .ahero{ padding-block:0; }
-  .hhero{ display:grid; grid-template-columns:1fr; gap:22px; padding-block:28px 34px; }
-  .hhero .txt{ display:flex; flex-direction:column; align-items:flex-start; }
-  .hhero .txt .eyebrow{ margin-bottom:16px; }
-  .hhero h1{ font-family:var(--display); font-weight:300; font-size:clamp(2rem,4vw,3.25rem); line-height:1.03; letter-spacing:-.02em; color:var(--fg); max-width:15ch; }
-  .hhero .txt .lead{ margin-top:18px; max-width:40ch; }
-  .hhero .txt .arrow{ margin-top:22px; }
-  /* slider del hero: varios destacados, texto SOBRE la imagen */
-  .hslider{ position:relative; border-radius:16px; overflow:hidden; aspect-ratio:16/11; background:var(--surface-deep); touch-action:pan-y; }
-  .hs-slide{ position:absolute; inset:0; display:block; text-decoration:none; color:#fff; opacity:0; z-index:0; pointer-events:none; transition:opacity .5s ease; }
-  .hs-slide.under{ opacity:1; z-index:1; transition:none; }
-  .hs-slide.on{ opacity:1; z-index:2; pointer-events:auto; }
-  .hs-slide > img{ position:absolute; inset:0; width:100%; height:100%; object-fit:cover; }
-  .hs-slide::after{ content:""; position:absolute; inset:0; background:linear-gradient(to top, rgba(20,18,16,.22) 0%, rgba(20,18,16,0) 45%); }
-  /* BOCADILLO: categoría + título + CTA dentro de una tarjeta sobre la foto */
-  .hs-cap{ position:absolute; top:30px; right:30px; left:auto; bottom:auto; z-index:2; max-width:min(86%,480px); background:rgba(255,255,255,.80); -webkit-backdrop-filter:blur(14px); backdrop-filter:blur(14px); border:1px solid rgba(255,255,255,.55); border-radius:16px; padding:16px 22px 15px; box-shadow:0 6px 24px rgba(20,18,16,.10); display:flex; flex-direction:column; align-items:flex-start; transition:transform .3s ease, box-shadow .3s ease; }
-  .hs-slide:hover .hs-cap{ transform:translateY(-3px); box-shadow:0 12px 34px rgba(20,18,16,.16); }
-  .hs-cap .eyebrow{ margin-bottom:8px; }
-  .hs-cap h2{ color:var(--fg); font-family:var(--display); font-weight:300; font-size:clamp(1.1rem,1.35vw,1.4rem); line-height:1.12; letter-spacing:-.008em; max-width:24ch; }
-  .hs-cap .arrow{ margin-top:10px; color:var(--soft); border-bottom:0; padding-bottom:0; font-size:8.5px; letter-spacing:.14em; }
-  .hs-cap .arrow:hover{ color:var(--fg); }
-  .hs-cap .arrow svg{ width:10px; height:10px; }
-  /* flechas = como la home: círculo con borde fino, fondo transparente (en blanco) */
-  .hs-nav{ position:absolute; top:50%; transform:translateY(-50%); z-index:3; width:38px; height:38px; border-radius:50%; border:1px solid rgba(255,255,255,.6); background:transparent; color:#fff; cursor:pointer; display:grid; place-items:center; transition:border-color .2s ease, background .2s ease; }
-  .hs-nav:hover{ border-color:#fff; background:rgba(255,255,255,.14); }
-  .hs-nav svg{ width:15px; height:15px; }
-  .hs-nav.prev{ left:18px; } .hs-nav.prev svg{ transform:rotate(180deg); }
-  .hs-nav.next{ right:18px; }
-  /* puntos = píldoras como la home (activa ancha), en blanco */
-  .hs-dots{ position:absolute; right:30px; bottom:30px; z-index:3; display:flex; align-items:center; gap:7px; }
-  .hs-dot{ width:6px; height:6px; border-radius:999px; border:0; background:rgba(255,255,255,.55); cursor:pointer; padding:0; transition:width .5s ease, background .3s ease; }
-  .hs-dot.on{ width:24px; background:#fff; }
-  @media (min-width:768px){
-    .hhero{ grid-template-columns:minmax(17rem,1fr) 2fr; grid-template-rows:minmax(0,1fr); gap:48px; align-items:stretch; min-height:calc(100svh - var(--cabecera)); padding-block:32px; }
-    .hhero .txt{ align-self:end; }
-    .hslider{ aspect-ratio:auto; height:100%; }
-  }
-  @media (max-width:767px){ .hs-nav{ display:none; } }
-
-  /* eyebrow dentro del bocadillo: plano, gris suave, fino (gana a .hhero .eyebrow) */
-  .hslider .hs-cap .eyebrow{ color:var(--soft); font-size:9.5px; letter-spacing:.2em; text-shadow:none; }
-  /* móvil: sin bocadillo; foto 4:3 y el texto del artículo debajo, como el resto de tarjetas */
+  /* ===== hero: intro del blog + carrusel de vídeos técnicos (uno grande, los otros asomando a los lados) ===== */
+  .ahero{ padding-block:0; overflow-x:clip; }
+  .vhero{ --w:calc(100vw - 72px); --gap:12px; padding-block:28px 30px; }
+  @media (min-width:768px){ .vhero{ --w:72vw; --gap:22px; } }
+  /* escritorio: el vídeo se encoge si la pantalla es baja, para que el hero quepa en un scroll */
+  @media (min-width:1024px){ .vhero{ --w:min(56vw, calc((100svh - var(--cabecera) - 290px) * 16 / 9)); padding-block:32px 24px; } }
+  .vhero-head{ text-align:center; margin-bottom:26px; }
+  .vhero-head .eyebrow{ margin-bottom:14px; }
+  .vhero h1{ font-family:var(--display); font-weight:300; font-size:clamp(2rem,3.2vw,2.8rem); line-height:1.03; letter-spacing:-.02em; color:var(--fg); }
+  .vhero-head .lead{ margin:12px auto 0; max-width:60ch; }
+  .vc-stage{ position:relative; height:calc(var(--w) * 9 / 16); margin-inline:calc(50% - 50vw); overflow:hidden; touch-action:pan-y; }
+  .vc-item{ position:absolute; top:0; left:calc(50% - var(--w) / 2); width:var(--w); height:100%; border-radius:16px; overflow:hidden; background:var(--surface-deep); transition:transform .8s cubic-bezier(.65,0,.35,1), opacity .8s ease; }
+  .vc-item.is-main{ z-index:2; }
+  /* laterales al 86 % y a --gap del grande */
+  .vc-item.is-prev{ transform:translateX(calc(-93% - var(--gap))) scale(.86); opacity:.45; cursor:pointer; }
+  .vc-item.is-next{ transform:translateX(calc(93% + var(--gap))) scale(.86); opacity:.45; cursor:pointer; }
+  .vc-item.is-prev:hover, .vc-item.is-next:hover{ opacity:.65; }
+  /* fuera de pantalla: el que sale por un lado y el que entra por el otro (copias, para que nunca crucen) */
+  .vc-item.is-far-prev{ transform:translateX(calc(-186% - 2 * var(--gap))) scale(.86); opacity:.45; }
+  .vc-item.is-far-next, .vc-item.is-off{ transform:translateX(calc(186% + 2 * var(--gap))) scale(.86); opacity:.45; }
+  .vc-item.is-off{ visibility:hidden; }
+  .vc-item.jump{ transition:none; }
+  .vc-link{ position:absolute; inset:0; display:block; }
+  .vc-link img{ width:100%; height:100%; object-fit:cover; display:block; }
+  .vc-item .vplay{ width:72px; height:72px; transition:opacity .3s ease, transform .3s ease; }
+  .vc-item .vplay svg{ width:24px; height:24px; }
+  .vc-item.is-main .vc-link:hover .vplay{ transform:translate(-50%,-50%) scale(1.06); }
+  .vc-item:not(.is-main) .vplay{ opacity:0; }
+  .vc-item iframe{ position:absolute; inset:0; width:100%; height:100%; border:0; }
+  .vc-item.playing .vc-link{ visibility:hidden; }
+  .vc-cap{ width:var(--w); max-width:100%; margin:20px auto 0; }
+  .vc-cap .eyebrow{ margin-bottom:8px; }
+  /* título, «Ver todos» y flechas en la misma línea */
+  .vc-row{ display:flex; justify-content:space-between; align-items:center; gap:16px 24px; }
+  /* el chevron queda 4,8px por encima del centro de su caja (por el subrayado del CTA): se compensa */
+  @media (min-width:768px){ .vc-row .vc-r{ margin-top:9.6px; } }
+  .vc-cap .eyebrow, .vc-t{ transition:opacity .3s ease; }
+  .vc-cap .fade{ opacity:0; }
+  .vc-t{ font-family:var(--display); font-weight:300; font-size:1.4rem; line-height:1.12; letter-spacing:-.008em; color:var(--fg); }
+  .vc-r{ display:flex; align-items:flex-start; gap:28px; flex:0 0 auto; }
+  /* flechas de los círculos a la altura del chevron del CTA (centro del chevron = 8,4px desde arriba del CTA; círculo de 36px) */
+  .vc-r .nvnav{ margin-top:-9.6px; }
   @media (max-width:767px){
-    .hslider{ --hsimg:calc((100vw - 40px) * .75); aspect-ratio:auto; height:calc(var(--hsimg) + 146px); border-radius:0; overflow:visible; background:none; }
-    .hs-slide{ background:var(--bg); }
-    .hs-slide > img, .hs-slide::after{ bottom:auto; height:var(--hsimg); border-radius:16px; }
-    .hs-cap{ top:calc(var(--hsimg) + 18px); left:0; right:0; max-width:none; background:none; -webkit-backdrop-filter:none; backdrop-filter:none; border:0; border-radius:0; padding:0; box-shadow:none; }
-    .hs-slide:hover .hs-cap{ transform:none; box-shadow:none; }
-    .hs-cap h2{ font-size:1.3rem; }
-    .hs-cap .arrow{ margin-top:14px; color:var(--fg); border-bottom:1px solid var(--line-strong); padding-bottom:8px; font-size:10.5px; letter-spacing:.16em; }
-    .hs-cap .arrow svg{ width:12px; height:12px; }
-    .hs-dots{ top:calc(var(--hsimg) - 24px); bottom:auto; right:18px; }
+    .vc-row{ flex-direction:column; align-items:stretch; }
+    .vc-t{ font-size:1.2rem; }
+    .vc-r{ width:100%; justify-content:space-between; }
+    .vc-item .vplay{ width:52px; height:52px; }
+    .vc-item .vplay svg{ width:18px; height:18px; }
   }
 
   /* ===== fila de destacados (estilo best sellers de la home) ===== */
@@ -819,15 +814,7 @@
   .card .more{ margin-top:12px; }
   .card:hover .more{ gap:20px; border-color:var(--fg); }
 
-  /* vídeos */
-  .vwrap{ position:relative; border-radius:16px; overflow:hidden; aspect-ratio:1; background:var(--surface-warm); }
-  .vwrap > img{ width:100%; height:100%; object-fit:cover; }
-  /* móvil: vídeos en carrusel, uno por pantalla */
-  @media (max-width:699px){
-    .vids{ display:flex; gap:16px; overflow-x:auto; scroll-snap-type:x mandatory; margin-inline:-20px; padding-inline:20px; scroll-padding-inline:20px; scrollbar-width:none; }
-    .vids::-webkit-scrollbar{ display:none; }
-    .vids > .card{ flex:0 0 calc(100% - 28px); scroll-snap-align:start; }
-  }
+  /* botón de play (vídeos del hero) */
   .vplay{ position:absolute; top:50%; left:50%; transform:translate(-50%,-50%); width:58px; height:58px; border-radius:50%; background:rgba(255,255,255,.92); display:grid; place-items:center; color:var(--fg); }
   .vplay svg{ width:20px; height:20px; }
 
@@ -999,55 +986,90 @@
 
 <main id="contenido">
 
-  <!-- ===== HERO estilo home: titular izquierda + imagen grande derecha ===== -->
+  <!-- ===== HERO: intro del blog + carrusel de vídeos técnicos ===== -->
   <section class="wrap ahero">
-    <div class="hhero">
-      <div class="txt">
+    <div class="vhero">
+      <div class="vhero-head">
         <p class="eyebrow">Rols Academy</p>
         <h1>El blog de alfombras, moquetas y diseño a medida</h1>
-        <p class="lead">Ideas de interiorismo, conocimiento técnico y formación en producto a medida.</p>
+        <p class="lead">Ideas de interiorismo, guías, tendencias y el conocimiento técnico de quienes tejemos alfombras.</p>
       </div>
-      <div class="hslider" id="hslider" aria-label="Artículos destacados">
-        <a class="hs-slide on" href="https://www.rolscarpets.com/tendencias-decoracion-interiorismo/">
-          <img loading="eager" src="https://www.rolscarpets.com/wp-content/uploads/2023/01/tendencias-de-decoracion-de-interiores-2023-720x720.webp" alt="Salón con tendencias de decoración de interiores">
-          <div class="hs-cap">
-            <p class="eyebrow">Tendencias y novedades</p>
-            <h2>7 tendencias en decoración de interiores</h2>
-            <span class="arrow">Leer el artículo <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" aria-hidden="true"><polyline points="9 6 15 12 9 18"></polyline></svg></span>
+      <div class="vc-stage" id="vcar" aria-label="Vídeos técnicos">
+      <div class="vc-item is-main" data-id="g4vORMhGi80" data-k="Vídeo técnico · Durabilidad" data-title="Resistencia a la abrasión en alfombras" data-dur="3:29">
+        <a class="vc-link" href="https://www.youtube.com/watch?v=g4vORMhGi80" target="_blank" rel="noopener"><img loading="eager" src="https://i.ytimg.com/vi/g4vORMhGi80/maxresdefault.jpg" alt="Resistencia a la abrasión en alfombras: guía para interioristas"><span class="vplay"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M8 5v14l11-7z"></path></svg></span></a>
+      </div>
+      <div class="vc-item is-next" data-id="9ZgWK4WTyzQ" data-k="Vídeo técnico · Climatización" data-title="Cómo elegir alfombra para suelo radiante" data-dur="2:43">
+        <a class="vc-link" href="https://www.youtube.com/watch?v=9ZgWK4WTyzQ" target="_blank" rel="noopener"><img loading="eager" src="https://i.ytimg.com/vi/9ZgWK4WTyzQ/maxresdefault.jpg" alt="Cómo elegir alfombra para suelo radiante: guía para interioristas"><span class="vplay"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M8 5v14l11-7z"></path></svg></span></a>
+      </div>
+      <div class="vc-item is-prev" data-id="xxHtIBF2ohI" data-k="Vídeo técnico · Normativa" data-title="Reacción al fuego en moquetas" data-dur="3:09">
+        <a class="vc-link" href="https://www.youtube.com/watch?v=xxHtIBF2ohI" target="_blank" rel="noopener"><img loading="eager" src="https://i.ytimg.com/vi/xxHtIBF2ohI/maxresdefault.jpg" alt="Reacción al fuego en moquetas: guía para interioristas"><span class="vplay"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M8 5v14l11-7z"></path></svg></span></a>
+      </div>
+      </div>
+      <div class="vc-cap">
+        <p class="eyebrow" id="vcar-k">Vídeo técnico · Durabilidad</p>
+        <div class="vc-row">
+        <p class="vc-t" id="vcar-t">Resistencia a la abrasión en alfombras</p>
+        <div class="vc-r">
+          <a class="arrow" href="https://www.youtube.com/@RolsCarpetsOfficial/videos" target="_blank" rel="noopener">Ver todos los vídeos <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><polyline points="9 6 15 12 9 18"></polyline></svg></a>
+          <div class="nvnav">
+            <button class="nvbtn prev" type="button" aria-label="Vídeo anterior"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="15 5 8 12 15 19"></polyline></svg></button>
+            <button class="nvbtn next" type="button" aria-label="Vídeo siguiente"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="9 5 16 12 9 19"></polyline></svg></button>
           </div>
-        </a>
-        <a class="hs-slide" href="https://www.rolscarpets.com/mitos-verdades-moquetas/">
-          <img loading="lazy" src="https://www.rolscarpets.com/wp-content/uploads/2023/05/sala-de-estar-con-moqueta-720x720.webp" alt="Sala de estar con moqueta">
-          <div class="hs-cap">
-            <p class="eyebrow">Materiales y elaboración</p>
-            <h2>Mitos y verdades sobre las moquetas</h2>
-            <span class="arrow">Leer el artículo <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" aria-hidden="true"><polyline points="9 6 15 12 9 18"></polyline></svg></span>
-          </div>
-        </a>
-        <a class="hs-slide" href="https://www.rolscarpets.com/15-ideas-originales-decorar-pared-blanca/">
-          <img loading="lazy" src="https://www.rolscarpets.com/wp-content/uploads/2023/05/decoracion-de-pared-blanca-720x720.webp" alt="Decoración de pared blanca">
-          <div class="hs-cap">
-            <p class="eyebrow">Decoración e inspiración</p>
-            <h2>15 ideas para decorar una pared blanca</h2>
-            <span class="arrow">Leer el artículo <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" aria-hidden="true"><polyline points="9 6 15 12 9 18"></polyline></svg></span>
-          </div>
-        </a>
-        <a class="hs-slide" href="https://www.rolscarpets.com/decoracion-colonial/">
-          <img loading="lazy" src="https://www.rolscarpets.com/wp-content/uploads/2023/04/ideas-de-decoracion-colonial-720x720.webp" alt="Ideas de decoración colonial">
-          <div class="hs-cap">
-            <p class="eyebrow">Decoración e inspiración</p>
-            <h2>Claves del estilo colonial en interiores</h2>
-            <span class="arrow">Leer el artículo <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" aria-hidden="true"><polyline points="9 6 15 12 9 18"></polyline></svg></span>
-          </div>
-        </a>
-
-        <div class="hs-dots">
-          <button class="hs-dot on" type="button" aria-label="Ir al destacado 1"></button>
-          <button class="hs-dot" type="button" aria-label="Ir al destacado 2"></button>
-          <button class="hs-dot" type="button" aria-label="Ir al destacado 3"></button>
-          <button class="hs-dot" type="button" aria-label="Ir al destacado 4"></button>
+        </div>
         </div>
       </div>
+    </div>
+  </section>
+
+  <!-- ===== MENÚ DE CATEGORÍAS (visible, enlaces reales a archivos) ===== -->
+  <section class="wrap sec" id="categorias">
+    <div class="sechead">
+      <div>
+        <p class="eyebrow">Rols Academy</p>
+        <h2>Explora por categoría</h2>
+      </div>
+      <p class="catcount"><b>5</b> categorías</p>
+    </div>
+
+    <div class="catg">
+      <a class="catc" href="https://www.rolscarpets.com/blog/categoria/decoracion-inspiracion/">
+        <span class="ph"><img loading="lazy" src="https://www.rolscarpets.com/wp-content/uploads/2025/09/kilt-02-ambiente-001.webp" alt="Biblioteca con alfombra Kilt"></span>
+        <span class="nm">Decoración e inspiración</span>
+        <span class="ds">Ideas, estilos y ambientes para encontrar la alfombra que encaja en cada espacio.</span>
+        <span class="arrow">Ver categoría <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" aria-hidden="true"><polyline points="9 6 15 12 9 18"></polyline></svg></span>
+      </a>
+      <a class="catc" href="https://www.rolscarpets.com/blog/categoria/guias-consejos/">
+        <span class="ph"><img loading="lazy" src="https://www.rolscarpets.com/wp-content/uploads/2026/03/rols-marina-clay-ambiente-001.webp" alt="Salón con alfombra Marina Clay"></span>
+        <span class="nm">Guías y consejos para elegir</span>
+        <span class="ds">Medidas, formas, colocación y todo lo que ayuda a decidir con criterio.</span>
+        <span class="arrow">Ver categoría <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" aria-hidden="true"><polyline points="9 6 15 12 9 18"></polyline></svg></span>
+      </a>
+      <a class="catc" href="https://www.rolscarpets.com/blog/categoria/limpieza-mantenimiento/">
+        <span class="ph"><img loading="lazy" src="https://www.rolscarpets.com/wp-content/uploads/2026/07/natalia-zubizarreta-salon-neutro-005.webp" alt="Salón en tonos neutros con alfombra"></span>
+        <span class="nm">Limpieza y mantenimiento</span>
+        <span class="ds">Cómo cuidar cada fibra para que la alfombra dure y se vea siempre bien.</span>
+        <span class="arrow">Ver categoría <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" aria-hidden="true"><polyline points="9 6 15 12 9 18"></polyline></svg></span>
+      </a>
+      <a class="catc" href="https://www.rolscarpets.com/blog/categoria/materiales-elaboracion/">
+        <span class="ph"><img loading="lazy" src="https://www.rolscarpets.com/wp-content/uploads/2026/09/rols-strata-07-020.webp" alt="Hilos y fibras de la colección Strata"></span>
+        <span class="nm">Materiales y elaboración</span>
+        <span class="ds">De qué están hechas nuestras alfombras y cómo las tejemos.</span>
+        <span class="arrow">Ver categoría <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" aria-hidden="true"><polyline points="9 6 15 12 9 18"></polyline></svg></span>
+      </a>
+      <a class="catc" href="https://www.rolscarpets.com/blog/categoria/tendencias-novedades/">
+        <span class="ph"><img loading="lazy" src="https://www.rolscarpets.com/wp-content/uploads/2026/03/rols-terra-patagonia-ocre-001.jpg" alt="Patio exterior con alfombra Terra Patagonia"></span>
+        <span class="nm">Tendencias y novedades</span>
+        <span class="ds">Lo último en diseño, colecciones y lo que se lleva en interiorismo.</span>
+        <span class="arrow">Ver categoría <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" aria-hidden="true"><polyline points="9 6 15 12 9 18"></polyline></svg></span>
+      </a>
+      <a class="catc all" href="https://www.rolscarpets.com/blog/categoria/academy/">
+        <span class="ph">
+          <span class="eyebrow">Rols Academy</span>
+          <span class="nm">Todos los artículos</span>
+          <span class="ds">Guías, ideas y materiales, del más reciente al primero.</span>
+          <span class="arrow">Ver todos <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" aria-hidden="true"><polyline points="9 6 15 12 9 18"></polyline></svg></span>
+        </span>
+      </a>
     </div>
   </section>
 
@@ -1109,58 +1131,6 @@
     </div>
   </section>
 
-  <!-- ===== MENÚ DE CATEGORÍAS (visible, enlaces reales a archivos) ===== -->
-  <section class="wrap sec" id="categorias">
-    <div class="sechead">
-      <div>
-        <p class="eyebrow">Rols Academy</p>
-        <h2>Explora por categoría</h2>
-      </div>
-      <p class="catcount"><b>5</b> categorías</p>
-    </div>
-
-    <div class="catg">
-      <a class="catc" href="https://www.rolscarpets.com/blog/categoria/decoracion-inspiracion/">
-        <span class="ph"><img loading="lazy" src="https://www.rolscarpets.com/wp-content/uploads/2025/09/kilt-02-ambiente-001.webp" alt="Biblioteca con alfombra Kilt"></span>
-        <span class="nm">Decoración e inspiración</span>
-        <span class="ds">Ideas, estilos y ambientes para encontrar la alfombra que encaja en cada espacio.</span>
-        <span class="arrow">Ver categoría <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" aria-hidden="true"><polyline points="9 6 15 12 9 18"></polyline></svg></span>
-      </a>
-      <a class="catc" href="https://www.rolscarpets.com/blog/categoria/guias-consejos/">
-        <span class="ph"><img loading="lazy" src="https://www.rolscarpets.com/wp-content/uploads/2026/03/rols-marina-clay-ambiente-001.webp" alt="Salón con alfombra Marina Clay"></span>
-        <span class="nm">Guías y consejos para elegir</span>
-        <span class="ds">Medidas, formas, colocación y todo lo que ayuda a decidir con criterio.</span>
-        <span class="arrow">Ver categoría <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" aria-hidden="true"><polyline points="9 6 15 12 9 18"></polyline></svg></span>
-      </a>
-      <a class="catc" href="https://www.rolscarpets.com/blog/categoria/limpieza-mantenimiento/">
-        <span class="ph"><img loading="lazy" src="https://www.rolscarpets.com/wp-content/uploads/2026/07/natalia-zubizarreta-salon-neutro-005.webp" alt="Salón en tonos neutros con alfombra"></span>
-        <span class="nm">Limpieza y mantenimiento</span>
-        <span class="ds">Cómo cuidar cada fibra para que la alfombra dure y se vea siempre bien.</span>
-        <span class="arrow">Ver categoría <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" aria-hidden="true"><polyline points="9 6 15 12 9 18"></polyline></svg></span>
-      </a>
-      <a class="catc" href="https://www.rolscarpets.com/blog/categoria/materiales-elaboracion/">
-        <span class="ph"><img loading="lazy" src="https://www.rolscarpets.com/wp-content/uploads/2026/09/rols-strata-07-020.webp" alt="Hilos y fibras de la colección Strata"></span>
-        <span class="nm">Materiales y elaboración</span>
-        <span class="ds">De qué están hechas nuestras alfombras y cómo las tejemos.</span>
-        <span class="arrow">Ver categoría <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" aria-hidden="true"><polyline points="9 6 15 12 9 18"></polyline></svg></span>
-      </a>
-      <a class="catc" href="https://www.rolscarpets.com/blog/categoria/tendencias-novedades/">
-        <span class="ph"><img loading="lazy" src="https://www.rolscarpets.com/wp-content/uploads/2026/03/rols-terra-patagonia-ocre-001.jpg" alt="Patio exterior con alfombra Terra Patagonia"></span>
-        <span class="nm">Tendencias y novedades</span>
-        <span class="ds">Lo último en diseño, colecciones y lo que se lleva en interiorismo.</span>
-        <span class="arrow">Ver categoría <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" aria-hidden="true"><polyline points="9 6 15 12 9 18"></polyline></svg></span>
-      </a>
-      <a class="catc all" href="https://www.rolscarpets.com/blog/categoria/academy/">
-        <span class="ph">
-          <span class="eyebrow">Rols Academy</span>
-          <span class="nm">Todos los artículos</span>
-          <span class="ds">Guías, ideas y materiales, del más reciente al primero.</span>
-          <span class="arrow">Ver todos <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" aria-hidden="true"><polyline points="9 6 15 12 9 18"></polyline></svg></span>
-        </span>
-      </a>
-    </div>
-  </section>
-
   <!-- ===== FORMACIONES: novedad. Solo se publica cuando hay una formación abierta. Contenido de ejemplo: sustituir por la formación real. ===== -->
   <section class="wrap sec fV1" id="formacion">
     <div class="fV1-photo">
@@ -1213,63 +1183,74 @@
     </div>
   </section>
 
-  <!-- ===== VÍDEOS ===== -->
-  <section class="wrap sec" id="videos">
-    <div class="sechead">
-      <div><p class="eyebrow">Rols Academy</p><h2>Vídeos</h2></div>
-      <a class="arrow quiet" href="#">Ver todos <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" aria-hidden="true"><polyline points="9 6 15 12 9 18"></polyline></svg></a>
-    </div>
-    <div class="grid vids" style="margin-top:28px">
-      <div class="card">
-        <div class="vwrap" style="background:var(--surface-warm)"><span class="vplay"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M8 5v14l11-7z"></path></svg></span></div>
-        <p class="eyebrow cat">Lanzamiento de colección</p><span class="nm">Marina, tejida como el mar</span>
-      </div>
-      <div class="card">
-        <div class="vwrap" style="background:var(--surface-deep)"><span class="vplay"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M8 5v14l11-7z"></path></svg></span></div>
-        <p class="eyebrow cat">Cómo se hace</p><span class="nm">Kilt: el proceso detrás</span>
-      </div>
-      <div class="card">
-        <div class="vwrap" style="background:var(--beige)"><span class="vplay"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M8 5v14l11-7z"></path></svg></span></div>
-        <p class="eyebrow cat">En proyecto</p><span class="nm">Castor y Aral en un hotel</span>
-      </div>
-    </div>
-  </section>
-
   <script>
     (function(){
-      var s=document.getElementById('hslider'); if(!s) return;
-      var slides=[].slice.call(s.querySelectorAll('.hs-slide'));
-      var dots=[].slice.call(s.querySelectorAll('.hs-dot'));
-      var N=slides.length, i=0, timer=null;
-      function go(n){
-        var prev=i; i=(n+N)%N;
-        for(var k=0;k<N;k++){ if(dots[k]) dots[k].classList.toggle('on',k===i); }
-        if(i===prev) return;
-        slides[prev].classList.remove('on'); slides[prev].classList.add('under');
-        slides[i].classList.add('on');
-        (function(p){ setTimeout(function(){ slides[p].classList.remove('under'); }, 520); })(prev);
+      var s=document.getElementById('vcar'); if(!s) return;
+      var orig=[].slice.call(s.querySelectorAll('.vc-item')), N=orig.length;
+      // se duplican los vídeos para que siempre haya uno esperando fuera a cada lado: así todos se deslizan en la misma dirección
+      orig.forEach(function(el){
+        var c=el.cloneNode(true); c.setAttribute('aria-hidden','true'); c.querySelector('.vc-link').tabIndex=-1;
+        s.appendChild(c);
+      });
+      var items=[].slice.call(s.querySelectorAll('.vc-item')), M=items.length, i=0;
+      var POS=['is-main','is-next','is-far-next','is-off','is-far-prev','is-prev'];
+      var sec=s.closest('.vhero'), k=document.getElementById('vcar-k'), t=document.getElementById('vcar-t');
+      function stop(el){ var f=el.querySelector('iframe'); if(f) f.remove(); el.classList.remove('playing'); }
+      function caption(){ k.textContent=items[i].dataset.k; t.textContent=items[i].dataset.title; }
+      function place(first){
+        items.forEach(function(el,j){
+          var p=POS[(j-i+M)%M], was=POS.filter(function(c){ return el.classList.contains(c); })[0];
+          // al entrar o salir de la posición escondida no se anima (va de un extremo al otro, fuera de pantalla)
+          el.classList.toggle('jump', first || p==='is-off' || was==='is-off');
+          POS.forEach(function(c){ el.classList.remove(c); }); el.classList.add(p);
+          if(p!=='is-main') stop(el);
+        });
       }
-      function next(){ go(i+1); }
-      function prev(){ go(i-1); }
-      function play(){ stop(); timer=setInterval(next,3000); }
-      function stop(){ if(timer){ clearInterval(timer); timer=null; } }
-      var bn=s.querySelector('.hs-nav.next'), bp=s.querySelector('.hs-nav.prev');
-      if(bn) bn.addEventListener('click',function(e){ e.preventDefault(); next(); play(); });
-      if(bp) bp.addEventListener('click',function(e){ e.preventDefault(); prev(); play(); });
-      dots.forEach(function(d,k){ d.addEventListener('click',function(e){ e.preventDefault(); go(k); play(); }); });
-      s.addEventListener('mouseenter',stop);
-      s.addEventListener('mouseleave',play);
+      function go(n){
+        i=(n+M)%M; place(false);
+        k.classList.add('fade'); t.classList.add('fade');
+        setTimeout(function(){ caption(); k.classList.remove('fade'); t.classList.remove('fade'); }, 300);
+      }
+      // el grande se reproduce aquí mismo; los laterales pasan a ser el grande
+      function play(el){
+        if(el.querySelector('iframe')) return;
+        var f=document.createElement('iframe');
+        f.src='https://www.youtube-nocookie.com/embed/'+el.dataset.id+'?autoplay=1&rel=0';
+        f.title=el.dataset.title; f.allow='autoplay; encrypted-media; picture-in-picture; fullscreen'; f.allowFullscreen=true;
+        el.appendChild(f); el.classList.add('playing');
+      }
+      var swiped=false;
+      items.forEach(function(el,j){
+        el.querySelector('.vc-link').addEventListener('click',function(e){
+          e.preventDefault();
+          if(swiped){ swiped=false; return; }
+          if(el.classList.contains('is-main')) play(el);
+          else if(el.classList.contains('is-next')) go(i+1);
+          else if(el.classList.contains('is-prev')) go(i-1);
+        });
+      });
+      sec.querySelector('.nvbtn.prev').addEventListener('click',function(){ go(i-1); });
+      sec.querySelector('.nvbtn.next').addEventListener('click',function(){ go(i+1); });
+      // flechas del teclado, mientras el carrusel se ve en pantalla y no se está escribiendo en un campo
+      document.addEventListener('keydown',function(e){
+        if(e.key!=='ArrowLeft' && e.key!=='ArrowRight') return;
+        if(e.altKey||e.ctrlKey||e.metaKey||e.shiftKey) return;
+        var a=document.activeElement;
+        if(a && (/^(INPUT|TEXTAREA|SELECT)$/.test(a.tagName) || a.isContentEditable)) return;
+        var r=s.getBoundingClientRect();
+        if(r.bottom<=0 || r.top>=window.innerHeight) return;
+        e.preventDefault(); go(e.key==='ArrowRight'?i+1:i-1);
+      });
       // deslizar con el dedo: izquierda = siguiente, derecha = anterior
-      var x0=null, y0=0, swiped=false;
-      s.addEventListener('touchstart',function(e){ x0=e.touches[0].clientX; y0=e.touches[0].clientY; swiped=false; stop(); },{passive:true});
+      var x0=null, y0=0;
+      s.addEventListener('touchstart',function(e){ x0=e.touches[0].clientX; y0=e.touches[0].clientY; swiped=false; },{passive:true});
       s.addEventListener('touchend',function(e){
         if(x0===null) return;
         var dx=e.changedTouches[0].clientX-x0, dy=e.changedTouches[0].clientY-y0; x0=null;
-        if(Math.abs(dx)>40 && Math.abs(dx)>Math.abs(dy)){ swiped=true; if(dx<0) next(); else prev(); }
-        play();
+        if(Math.abs(dx)>40 && Math.abs(dx)>Math.abs(dy)){ swiped=true; go(dx<0?i+1:i-1); }
       });
-      s.addEventListener('click',function(e){ if(swiped){ e.preventDefault(); swiped=false; } },true);
-      go(0); play();
+      place(true);
+      requestAnimationFrame(function(){ requestAnimationFrame(function(){ items.forEach(function(el){ el.classList.remove('jump'); }); }); });
     })();
 
     (function(){
