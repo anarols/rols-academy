@@ -295,28 +295,19 @@
   .band figcaption{ margin-top:12px; font-size:11px; letter-spacing:.02em; color:var(--soft); }
   /* --- Formación · V1: etiqueta «Rols Academy» + «Masterclass» abajo a la izquierda sobre la foto ancha; debajo, los datos a la izquierda y el correo en una tarjeta flotante a la derecha.
          La sección solo se publica cuando hay una formación abierta. --- */
-  .fV1-photo{ position:relative; height:clamp(340px,40vw,580px); border-radius:16px; overflow:hidden; background:var(--surface-deep); }
-  .fV1-photo img{ width:100%; height:100%; object-fit:cover; object-position:55% 10%; display:block; }
-  .fV1-veil{ position:absolute; inset:0; background:linear-gradient(15deg, rgba(0,0,0,.6) 0%, rgba(0,0,0,.18) 40%, rgba(0,0,0,0) 62%); }
-  .fV1-word{ position:absolute; left:clamp(20px,3.4vw,48px); bottom:clamp(24px,3vw,44px); margin:0; font-family:var(--display); font-weight:300; font-size:clamp(3rem,5.6vw,5rem); line-height:1; letter-spacing:-.015em; color:#fff; }
-  .fV1-kicker{ display:block; margin-bottom:14px; font-family:var(--sans); font-weight:500; font-size:11px; letter-spacing:.2em; text-transform:uppercase; color:rgba(255,255,255,.85); }
-  .fV1-below{ display:grid; grid-template-columns:minmax(0,1fr) minmax(0,500px); gap:40px; align-items:start; }
-  .fV1-info{ padding-top:32px; }
-  .fV1-info h2{ margin:0; }
-  .fV1-info h2 .dash{ color:rgba(51,58,60,.35); padding:0 .2em; }
-  .fV1-name{ margin:14px 0 0; font-size:13px; line-height:1.75; color:var(--fg); }
-  .fV1-by{ display:flex; flex-wrap:wrap; align-items:center; gap:8px 12px; margin:10px 0 0; font-size:13px; line-height:1.75; color:var(--muted); }
-  .fV1-by img{ height:22px; width:auto; object-fit:contain; filter:brightness(0) invert(57.4%); }
-  .fV1-by i{ font-style:normal; color:rgba(51,58,60,.35); }
-  .fV1-temas{ margin:10px 0 0; font-size:13px; font-weight:300; line-height:1.75; color:var(--muted); }
-  .fV1-card{ position:relative; z-index:2; margin-top:-52px; background:var(--bg); border:1px solid var(--line-strong); border-radius:16px; padding:22px 28px 24px; }
-  .fV1-form{ display:flex; align-items:flex-end; gap:24px; }
-  .fV1-form input{ flex:1; min-width:0; border:0; border-bottom:1px solid var(--line-strong); background:none; padding:12px 2px; font-family:var(--sans); font-size:15px; font-weight:300; color:var(--fg); }
-  .fV1-form input::placeholder{ color:var(--soft); }
-  .fV1-form input:focus{ outline:none; border-color:var(--fg); }
-  .fV1-form button.arrow{ border-top:0; border-left:0; border-right:0; background:none; cursor:pointer; white-space:nowrap; font-family:var(--sans); color:var(--fg); padding-left:0; padding-right:0; }
-  @media (max-width:860px){ .fV1-below{ grid-template-columns:1fr; gap:0; } .fV1-card{ margin:22px 0 0; padding:0; border:0; border-radius:0; background:none; } .fV1-info{ padding-top:28px; } }
-  @media (max-width:520px){ .fV1-form{ flex-direction:column; align-items:stretch; gap:18px; } .fV1-form input{ flex:none; width:100%; } .fV1-form button.arrow{ align-self:flex-start; } }
+  /* formación presencial, como rols-home-2026/academy */
+  .fpres{ display:grid; row-gap:40px; align-items:center; }
+  @media (min-width:768px){ .fpres{ grid-template-columns:minmax(0,1.45fr) minmax(20rem,1fr); column-gap:48px; } }
+  @media (min-width:1024px){ .fpres{ column-gap:80px; } }
+  .fpres-ph{ position:relative; display:block; aspect-ratio:16/10; border-radius:16px; overflow:hidden; background:var(--surface-deep); }
+  .fpres-ph img{ position:absolute; inset:0; width:100%; height:100%; object-fit:cover; object-position:center 45%; }
+  .sec.fpres h2{ margin-top:16px; max-width:18ch; font-size:clamp(1.6rem,2.1vw,2rem); line-height:1.1; letter-spacing:-.015em; }
+  .fpres .intro{ margin-top:16px; max-width:40ch; font-size:13.5px; line-height:1.8; font-weight:300; color:var(--muted); }
+  .fpres ul{ list-style:none; margin:32px 0 0; padding:0; max-width:30rem; border-top:1px solid rgba(51,58,60,.12); }
+  .fpres li{ padding-block:20px; border-bottom:1px solid rgba(51,58,60,.12); }
+  .fpres li .who{ font-family:var(--display); font-size:17px; line-height:1.3; font-weight:300; }
+  .fpres li .txt{ margin-top:6px; font-size:13px; line-height:1.7; font-weight:300; color:var(--muted); }
+  .fpres li .arrow{ margin-top:12px; }
 
   /* ---------- Crevillent: año + texto + foto pequeña ---------- */
   .cresec{ padding-block:40px; }
@@ -749,16 +740,17 @@
 
   /* ===== hero: intro del blog + carrusel de vídeos técnicos (uno grande, los otros asomando a los lados) ===== */
   .ahero{ padding-block:0; overflow-x:clip; }
-  .vhero{ --w:calc(100vw - 72px); --gap:12px; padding-block:28px 30px; }
-  @media (min-width:768px){ .vhero{ --w:72vw; --gap:22px; } }
+  /* abajo, el mismo hueco que dejan las secciones (.sec: 36px / 56px) para que la separación con la siguiente sea igual a la del resto */
+  .vhero{ --w:calc(100vw - 72px); --gap:12px; padding-block:28px 36px; }
+  @media (min-width:768px){ .vhero{ --w:72vw; --gap:22px; padding-bottom:56px; } }
   /* escritorio: el vídeo se encoge si la pantalla es baja, para que el hero quepa en un scroll */
-  @media (min-width:1024px){ .vhero{ --w:min(56vw, calc((100svh - var(--cabecera) - 290px) * 16 / 9)); padding-block:32px 24px; } }
+  @media (min-width:1024px){ .vhero{ --w:min(56vw, calc((100svh - var(--cabecera) - 290px) * 16 / 9)); padding-block:32px 56px; } }
   .vhero-head{ text-align:center; margin-bottom:26px; }
   .vhero-head .eyebrow{ margin-bottom:14px; }
   .vhero h1{ font-family:var(--display); font-weight:300; font-size:clamp(2rem,3.2vw,2.8rem); line-height:1.03; letter-spacing:-.02em; color:var(--fg); }
   .vhero-head .lead{ margin:12px auto 0; max-width:60ch; }
   .vc-stage{ position:relative; height:calc(var(--w) * 9 / 16); margin-inline:calc(50% - 50vw); overflow:hidden; touch-action:pan-y; }
-  .vc-item{ position:absolute; top:0; left:calc(50% - var(--w) / 2); width:var(--w); height:100%; border-radius:16px; overflow:hidden; background:var(--surface-deep); transition:transform .8s cubic-bezier(.65,0,.35,1), opacity .8s ease; }
+  .vc-item{ position:absolute; top:0; left:calc(50% - var(--w) / 2); width:var(--w); height:100%; border-radius:16px; overflow:hidden; background:var(--surface-deep); translate:var(--dx,0px) 0; transition:transform .8s cubic-bezier(.65,0,.35,1), translate .8s cubic-bezier(.65,0,.35,1), opacity .8s ease; }
   .vc-item.is-main{ z-index:2; }
   /* laterales al 86 % y a --gap del grande */
   .vc-item.is-prev{ transform:translateX(calc(-93% - var(--gap))) scale(.86); opacity:.45; cursor:pointer; }
@@ -769,6 +761,9 @@
   .vc-item.is-far-next, .vc-item.is-off{ transform:translateX(calc(186% + 2 * var(--gap))) scale(.86); opacity:.45; }
   .vc-item.is-off{ visibility:hidden; }
   .vc-item.jump{ transition:none; }
+  .vc-stage.dragging .vc-item{ transition:none; }
+  .vc-stage.dragging, .vc-stage.dragging *{ cursor:grabbing; }
+  .vc-stage a, .vc-stage img{ -webkit-user-drag:none; user-select:none; }
   .vc-link{ position:absolute; inset:0; display:block; }
   .vc-link img{ width:100%; height:100%; object-fit:cover; display:block; }
   .vc-item .vplay{ width:72px; height:72px; transition:opacity .3s ease, transform .3s ease; }
@@ -893,26 +888,29 @@
   }
   .hhero .txt .lead{ font-size:13px; font-weight:300; line-height:1.75; color:rgba(51,58,60,.7); }
 
-  /* ===== novedades = galería scroll (como Best Sellers de la home) ===== */
-  .nvwrap{ position:relative; margin-top:30px; }
-  .nvtrack{ display:flex; gap:22px; overflow-x:auto; overflow-y:hidden; scrollbar-width:none; -webkit-overflow-scrolling:touch; padding-bottom:4px; }
+  /* ===== lo último = carril a sangre como «Del blog» de rols-home-2026/academy ===== */
+  .nvwrap{ margin-top:24px; margin-inline:-20px; }
+  .nvtrack{ display:flex; gap:16px; overflow-x:auto; overflow-y:hidden; padding:0 20px 8px; scroll-padding-inline:20px; scrollbar-width:none; -webkit-overflow-scrolling:touch; cursor:grab; }
   .nvtrack::-webkit-scrollbar{ display:none; }
-  .nvcard{ flex:0 0 clamp(260px,29%,340px); text-decoration:none; color:var(--fg); }
-  .nvcard .ph{ border-radius:16px; overflow:hidden; aspect-ratio:3/4; background:var(--surface-deep); }
-  .nvcard .ph img{ display:block; width:100%; height:100%; object-fit:cover; transition:transform .7s ease; }
-  .nvcard:hover .ph img{ transform:scale(1.04); }
-  .nvcard .eyebrow{ margin-top:14px; }
-  .nvcard h3{ margin-top:6px; font-family:var(--display); font-weight:300; letter-spacing:-.01em; line-height:1.18; font-size:17px; color:var(--fg); }
-  /* cabecera: Ver todas + flechas (como la home) */
-  .nvctl{ display:inline-flex; align-items:center; gap:28px; }
-  .nvall{ font-family:var(--sans); font-size:10.5px; font-weight:500; letter-spacing:.16em; text-transform:uppercase; color:var(--fg); text-decoration:underline; text-decoration-color:var(--line-strong); text-underline-offset:6px; transition:text-decoration-color .2s ease; white-space:nowrap; }
-  .nvall:hover{ text-decoration-color:var(--fg); }
+  .nvtrack.dragging{ cursor:grabbing; }
+  .nvtrack.dragging .nvcard{ pointer-events:none; }
+  .nvcard{ flex:0 0 60%; text-decoration:none; color:var(--fg); -webkit-user-drag:none; user-select:none; }
+  .nvcard .ph{ display:block; border-radius:16px; overflow:hidden; aspect-ratio:1; background:var(--surface-deep); }
+  .nvcard .ph img{ display:block; width:100%; height:100%; object-fit:cover; transition:transform 1.1s ease-out; -webkit-user-drag:none; }
+  .nvcard:hover .ph img{ transform:scale(1.03); }
+  .nvcard .k{ display:block; margin-top:12px; font-family:var(--sans); font-size:9.5px; font-weight:500; letter-spacing:.16em; line-height:1.5; text-transform:uppercase; color:rgba(51,58,60,.5); }
+  .nvcard .t{ display:block; margin-top:4px; font-family:var(--display); font-weight:300; font-size:15px; line-height:1.3; letter-spacing:.005em; color:var(--fg); }
+  @media (min-width:640px){ .nvcard{ flex-basis:34%; } }
+  @media (min-width:768px){ .nvwrap{ margin-inline:-40px; } .nvtrack{ gap:20px; padding-inline:40px; scroll-padding-inline:40px; } .nvcard{ flex-basis:24%; } }
+  @media (min-width:1024px){ .nvwrap{ margin-inline:-64px; } .nvtrack{ padding-inline:64px; scroll-padding-inline:64px; } .nvcard{ flex-basis:18.6%; } }
+  /* cabecera: Todos los artículos + flechas (las flechas, desde tableta) */
+  .nvctl{ display:inline-flex; align-items:center; gap:24px; }
+  .nvctl .arrow{ margin-bottom:0; }
   .nvnav{ display:inline-flex; align-items:center; gap:8px; }
   .nvbtn{ flex:0 0 auto; width:36px; height:36px; min-width:36px; border-radius:50%; border:1px solid var(--line); background:transparent; color:rgba(51,58,60,.7); cursor:pointer; display:grid; place-items:center; padding:0; line-height:0; transition:border-color .2s ease, color .2s ease; }
   .nvbtn:hover{ border-color:var(--fg); color:var(--fg); }
   .nvbtn svg{ width:14px; height:14px; }
-  @media (max-width:900px){ .nvcard{ flex-basis:44%; } }
-  @media (max-width:560px){ .nvcard{ flex-basis:80%; } .nvctl .arrow{ display:none; } }
+  @media (max-width:767px){ #ultimos .nvnav{ display:none; } }
 
 </style>
 </head>
@@ -991,7 +989,7 @@
     <div class="vhero">
       <div class="vhero-head">
         <p class="eyebrow">Rols Academy</p>
-        <h1>El blog de alfombras, moquetas y diseño a medida</h1>
+        <h1>Alfombras y moquetas de diseño: todo lo que sabemos, para ti</h1>
         <p class="lead">Ideas de interiorismo, guías, tendencias y el conocimiento técnico de quienes tejemos alfombras.</p>
       </div>
       <div class="vc-stage" id="vcar" aria-label="Vídeos técnicos">
@@ -1018,6 +1016,28 @@
         </div>
         </div>
       </div>
+    </div>
+  </section>
+
+  <!-- ===== FORMACIÓN PRESENCIAL (como rols-home-2026/academy) ===== -->
+  <section class="wrap sec fpres" id="formacion">
+    <span class="fpres-ph"><img loading="lazy" src="academy-fotos/formacion-showroom-madrid.webp" alt="Una formación de Rols en el showroom de Madrid"></span>
+    <div>
+      <p class="eyebrow">Rols Academy presencial</p>
+      <h2>Formación en nuestro showroom de Madrid</h2>
+      <p class="intro">En nuestro showroom de Madrid impartimos clases personalizadas, con las muestras en la mano.</p>
+      <ul>
+        <li>
+          <p class="who">Empresas</p>
+          <p class="txt">Si te gustaría una formación para tu equipo, escríbenos y la preparamos a vuestra medida.</p>
+          <a class="arrow" href="mailto:info@rolscarpets.com?subject=Rols%20Academy%20%C2%B7%20Formaci%C3%B3n%20para%20empresas" target="_blank" rel="noreferrer">Escríbenos <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><polyline points="9 6 15 12 9 18"></polyline></svg></a>
+        </li>
+        <li>
+          <p class="who">Estudiantes</p>
+          <p class="txt">Escríbenos y te avisamos de la próxima formación.</p>
+          <a class="arrow" href="mailto:info@rolscarpets.com?subject=Rols%20Academy%20%C2%B7%20Pr%C3%B3xima%20formaci%C3%B3n" target="_blank" rel="noreferrer">Avísame <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><polyline points="9 6 15 12 9 18"></polyline></svg></a>
+        </li>
+      </ul>
     </div>
   </section>
 
@@ -1073,12 +1093,12 @@
     </div>
   </section>
 
-  <!-- ===== LO ÚLTIMO EN EL BLOG (fila estilo best sellers) ===== -->
+  <!-- ===== LO ÚLTIMO EN EL BLOG (carril a sangre, como «Del blog») ===== -->
   <section class="wrap sec" id="ultimos">
     <div class="sechead">
       <div><p class="eyebrow">Rols Academy</p><h2>Lo último en el blog</h2></div>
       <div class="nvctl">
-        <a class="nvall" href="https://www.rolscarpets.com/blog/categoria/academy/">Ver más</a>
+        <a class="arrow" href="https://www.rolscarpets.com/blog/categoria/academy/">Todos los artículos <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><polyline points="9 6 15 12 9 18"></polyline></svg></a>
         <div class="nvnav">
           <button class="nvbtn prev" type="button" aria-label="Ver anteriores"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="15 5 8 12 15 19"></polyline></svg></button>
           <button class="nvbtn next" type="button" aria-label="Ver siguientes"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="9 5 16 12 9 19"></polyline></svg></button>
@@ -1088,68 +1108,45 @@
     <div class="nvwrap">
       <div class="nvtrack" id="nvtrack">
         <a class="nvcard" href="https://www.rolscarpets.com/tipos-moquetas/">
-          <div class="ph"><img loading="lazy" src="https://www.rolscarpets.com/wp-content/uploads/2023/05/tipos-de-moquetas-para-suelos-720x720.webp" alt="Tipos de moquetas para suelos"></div>
-          <p class="eyebrow">Guías y consejos para elegir</p><h3>Tipos de moquetas para suelo</h3>
+          <span class="ph"><img loading="lazy" src="https://www.rolscarpets.com/wp-content/uploads/2023/05/tipos-de-moquetas-para-suelos-720x720.webp" alt="Tipos de moquetas para suelos" draggable="false"></span>
+          <span class="k">Guías y consejos para elegir</span><span class="t">Tipos de moquetas para suelo</span>
         </a>
         <a class="nvcard" href="https://www.rolscarpets.com/cemento-pulido-pros-contras/">
-          <div class="ph"><img loading="lazy" src="https://www.rolscarpets.com/wp-content/uploads/2023/04/cemento-pulido-720x720.webp" alt="Cemento pulido"></div>
-          <p class="eyebrow">Decoración e inspiración</p><h3>Conoce el cemento pulido</h3>
+          <span class="ph"><img loading="lazy" src="https://www.rolscarpets.com/wp-content/uploads/2023/04/cemento-pulido-720x720.webp" alt="Cemento pulido" draggable="false"></span>
+          <span class="k">Decoración e inspiración</span><span class="t">Conoce el cemento pulido</span>
         </a>
         <a class="nvcard" href="https://www.rolscarpets.com/mantener-calor-casa/">
-          <div class="ph"><img loading="lazy" src="https://www.rolscarpets.com/wp-content/uploads/2023/04/mantener-el-calor-en-casa-en-invierno-720x720.webp" alt="Mantener el calor en casa en invierno"></div>
-          <p class="eyebrow">Decoración e inspiración</p><h3>6 formas de mantener el calor en casa</h3>
+          <span class="ph"><img loading="lazy" src="https://www.rolscarpets.com/wp-content/uploads/2023/04/mantener-el-calor-en-casa-en-invierno-720x720.webp" alt="Mantener el calor en casa en invierno" draggable="false"></span>
+          <span class="k">Decoración e inspiración</span><span class="t">6 formas de mantener el calor en casa</span>
         </a>
         <a class="nvcard" href="https://www.rolscarpets.com/alfombras-naturales-sinteticas/">
-          <div class="ph"><img loading="lazy" src="https://www.rolscarpets.com/wp-content/uploads/2023/02/alfombra-de-lana-Rols-720x720.jpg" alt="Alfombra de lana Rols"></div>
-          <p class="eyebrow">Materiales y elaboración</p><h3>¿Alfombras naturales o sintéticas?</h3>
+          <span class="ph"><img loading="lazy" src="https://www.rolscarpets.com/wp-content/uploads/2023/02/alfombra-de-lana-Rols-720x720.jpg" alt="Alfombra de lana Rols" draggable="false"></span>
+          <span class="k">Materiales y elaboración</span><span class="t">¿Alfombras naturales o sintéticas?</span>
         </a>
         <a class="nvcard" href="https://www.rolscarpets.com/alfombras-cabecero-cama/">
-          <div class="ph"><img loading="lazy" src="https://www.rolscarpets.com/wp-content/uploads/2023/02/alfombra-de-cabecero-de-cama-720x720.webp" alt="Alfombra de cabecero de cama"></div>
-          <p class="eyebrow">Decoración e inspiración</p><h3>La alfombra de cabecero de cama</h3>
+          <span class="ph"><img loading="lazy" src="https://www.rolscarpets.com/wp-content/uploads/2023/02/alfombra-de-cabecero-de-cama-720x720.webp" alt="Alfombra de cabecero de cama" draggable="false"></span>
+          <span class="k">Decoración e inspiración</span><span class="t">La alfombra de cabecero de cama</span>
         </a>
         <a class="nvcard" href="https://www.rolscarpets.com/elegir-alfombras-para-salon/">
-          <div class="ph"><img loading="lazy" src="https://www.rolscarpets.com/wp-content/uploads/2022/12/alfombra-natural-salon.jpg" alt="Alfombra natural en un salón"></div>
-          <p class="eyebrow">Guías y consejos para elegir</p><h3>Las 5 claves para elegir alfombra de salón</h3>
+          <span class="ph"><img loading="lazy" src="https://www.rolscarpets.com/wp-content/uploads/2022/12/alfombra-natural-salon.jpg" alt="Alfombra natural en un salón" draggable="false"></span>
+          <span class="k">Guías y consejos para elegir</span><span class="t">Las 5 claves para elegir alfombra de salón</span>
         </a>
         <a class="nvcard" href="https://www.rolscarpets.com/ideas-decorar-jardin/">
-          <div class="ph"><img loading="lazy" src="https://www.rolscarpets.com/wp-content/uploads/2023/01/relax_terraza.jpg" alt="Terraza de jardín decorada"></div>
-          <p class="eyebrow">Decoración e inspiración</p><h3>7 ideas para decorar un jardín</h3>
+          <span class="ph"><img loading="lazy" src="https://www.rolscarpets.com/wp-content/uploads/2023/01/relax_terraza.jpg" alt="Terraza de jardín decorada" draggable="false"></span>
+          <span class="k">Decoración e inspiración</span><span class="t">7 ideas para decorar un jardín</span>
         </a>
         <a class="nvcard" href="https://www.rolscarpets.com/decoracion-slow-deco/">
-          <div class="ph"><img loading="lazy" src="https://www.rolscarpets.com/wp-content/uploads/2023/01/ROLS-CARPETS-Diana-Herringbone-Stone-001.jpg" alt="Salón con estilo slow deco"></div>
-          <p class="eyebrow">Decoración e inspiración</p><h3>Slow deco: qué es y cómo aplicarla</h3>
+          <span class="ph"><img loading="lazy" src="https://www.rolscarpets.com/wp-content/uploads/2023/01/ROLS-CARPETS-Diana-Herringbone-Stone-001.jpg" alt="Salón con estilo slow deco" draggable="false"></span>
+          <span class="k">Decoración e inspiración</span><span class="t">Slow deco: qué es y cómo aplicarla</span>
         </a>
         <a class="nvcard" href="https://www.rolscarpets.com/alfombras-terrazas-como-elegir/">
-          <div class="ph"><img loading="lazy" src="https://www.rolscarpets.com/wp-content/uploads/2022/07/Alfombra-terraza-exterior.jpg" alt="Alfombra de exterior en una terraza"></div>
-          <p class="eyebrow">Guías y consejos para elegir</p><h3>Alfombras para terrazas: cómo elegir</h3>
+          <span class="ph"><img loading="lazy" src="https://www.rolscarpets.com/wp-content/uploads/2022/07/Alfombra-terraza-exterior.jpg" alt="Alfombra de exterior en una terraza" draggable="false"></span>
+          <span class="k">Guías y consejos para elegir</span><span class="t">Alfombras para terrazas: cómo elegir</span>
         </a>
         <a class="nvcard" href="https://www.rolscarpets.com/alfombras-redondas-cuadradas/">
-          <div class="ph"><img loading="lazy" src="https://www.rolscarpets.com/wp-content/uploads/2022/10/alfombra_circular_2.jpg" alt="Alfombra circular en un salón"></div>
-          <p class="eyebrow">Guías y consejos para elegir</p><h3>Cómo usar alfombras redondas o cuadradas</h3>
+          <span class="ph"><img loading="lazy" src="https://www.rolscarpets.com/wp-content/uploads/2022/10/alfombra_circular_2.jpg" alt="Alfombra circular en un salón" draggable="false"></span>
+          <span class="k">Guías y consejos para elegir</span><span class="t">Cómo usar alfombras redondas o cuadradas</span>
         </a>
-      </div>
-    </div>
-  </section>
-
-  <!-- ===== FORMACIONES: novedad. Solo se publica cuando hay una formación abierta. Contenido de ejemplo: sustituir por la formación real. ===== -->
-  <section class="wrap sec fV1" id="formacion">
-    <div class="fV1-photo">
-      <img loading="lazy" src="academy-fotos/masterclass-rotulo-rols.webp" alt="Showroom de Rols con el rótulo iluminado, alfombras enrolladas y muestrarios en las estanterías">
-      <span class="fV1-veil" aria-hidden="true"></span>
-      <p class="fV1-word"><span class="fV1-kicker">Rols Academy</span>Masterclass</p>
-    </div>
-    <div class="fV1-below">
-      <div class="fV1-info">
-        <h2>Formación<span class="dash">—</span>Noviembre 2026</h2>
-        <p class="fV1-name">Materiales y fibras para alfombras a medida</p>
-        <p class="fV1-by"><img src="academy-logos/IADE.svg" alt="IADE"><i>·</i><span>18 de noviembre</span><i>·</i><span>10:00 h</span></p>
-        <p class="fV1-temas">Fibras naturales y sintéticas · Calidades y durabilidad · Qué material usar en cada espacio</p>
-      </div>
-      <div class="fV1-card">
-        <form class="fV1-form" onsubmit="return false">
-          <input type="email" placeholder="Tu correo electrónico" aria-label="Correo electrónico" autocomplete="email">
-          <button type="submit" class="arrow">Inscribirme <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" aria-hidden="true"><polyline points="9 6 15 12 9 18"></polyline></svg></button>
-        </form>
       </div>
     </div>
   </section>
@@ -1241,14 +1238,33 @@
         if(r.bottom<=0 || r.top>=window.innerHeight) return;
         e.preventDefault(); go(e.key==='ArrowRight'?i+1:i-1);
       });
-      // deslizar con el dedo: izquierda = siguiente, derecha = anterior
-      var x0=null, y0=0;
-      s.addEventListener('touchstart',function(e){ x0=e.touches[0].clientX; y0=e.touches[0].clientY; swiped=false; },{passive:true});
-      s.addEventListener('touchend',function(e){
-        if(x0===null) return;
-        var dx=e.changedTouches[0].clientX-x0, dy=e.changedTouches[0].clientY-y0; x0=null;
-        if(Math.abs(dx)>40 && Math.abs(dx)>Math.abs(dy)){ swiped=true; go(dx<0?i+1:i-1); }
+      // arrastrar con el ratón o el dedo: los vídeos siguen al puntero y, al soltar, pasa al siguiente (izquierda) o al anterior (derecha)
+      var x0=null, y0=0, dx=0, pid=null, drag=false;
+      s.addEventListener('dragstart',function(e){ e.preventDefault(); });
+      s.addEventListener('pointerdown',function(e){
+        if(e.button!==0) return;
+        x0=e.clientX; y0=e.clientY; dx=0; drag=false; pid=e.pointerId;
       });
+      s.addEventListener('pointermove',function(e){
+        if(x0===null || e.pointerId!==pid) return;
+        dx=e.clientX-x0;
+        if(!drag){
+          if(Math.abs(dx)<6) return;
+          if(Math.abs(e.clientY-y0)>Math.abs(dx)){ x0=null; return; }
+          drag=true; s.classList.add('dragging');
+          try{ s.setPointerCapture(pid); }catch(err){}
+        }
+        s.style.setProperty('--dx', dx+'px');
+      });
+      function release(e){
+        if(x0===null || e.pointerId!==pid) return;
+        x0=null; if(!drag) return;
+        drag=false; swiped=true; setTimeout(function(){ swiped=false; },0);
+        s.classList.remove('dragging'); s.style.setProperty('--dx','0px');
+        if(Math.abs(dx)>Math.min(110, items[i].offsetWidth*.15)) go(dx<0?i+1:i-1);
+      }
+      s.addEventListener('pointerup',release);
+      s.addEventListener('pointercancel',release);
       place(true);
       requestAnimationFrame(function(){ requestAnimationFrame(function(){ items.forEach(function(el){ el.classList.remove('jump'); }); }); });
     })();
@@ -1257,7 +1273,7 @@
       var t=document.getElementById('nvtrack'); if(!t) return;
       var sec=t.closest('section');
       var bp=sec.querySelector('.nvbtn.prev'), bn=sec.querySelector('.nvbtn.next');
-      function step(){ var c=t.querySelector('.nvcard'); return c ? c.getBoundingClientRect().width + 22 : 300; }
+      function step(){ var c=t.querySelector('.nvcard'); return c ? c.getBoundingClientRect().width + parseFloat(getComputedStyle(t).columnGap) : 300; }
       function page(){ var s=step(); return Math.max(s, Math.floor(t.clientWidth/s)*s); }
       function animTo(target){
         var max=t.scrollWidth - t.clientWidth;
@@ -1270,6 +1286,18 @@
       }
       if(bn) bn.addEventListener('click',function(){ animTo(t.scrollLeft + page()); });
       if(bp) bp.addEventListener('click',function(){ animTo(t.scrollLeft - page()); });
+      // arrastrar con el ratón (con el dedo ya se desliza de forma nativa)
+      var x0=null, sl0=0, moved=false;
+      t.addEventListener('dragstart',function(e){ e.preventDefault(); });
+      t.addEventListener('pointerdown',function(e){ if(e.pointerType!=='mouse' || e.button!==0) return; x0=e.clientX; sl0=t.scrollLeft; moved=false; });
+      window.addEventListener('pointermove',function(e){
+        if(x0===null) return;
+        var d=e.clientX-x0;
+        if(!moved && Math.abs(d)<5) return;
+        moved=true; t.classList.add('dragging'); t.scrollLeft=sl0-d;
+      });
+      window.addEventListener('pointerup',function(){ if(x0===null) return; x0=null; t.classList.remove('dragging'); });
+      t.addEventListener('click',function(e){ if(moved){ e.preventDefault(); e.stopPropagation(); moved=false; } },true);
     })();
   </script>
 
