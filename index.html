@@ -308,6 +308,21 @@
   .fpres li .who{ font-family:var(--display); font-size:17px; line-height:1.3; font-weight:300; }
   .fpres li .txt{ margin-top:6px; font-size:13px; line-height:1.7; font-weight:300; color:var(--muted); }
   .fpres li .arrow{ margin-top:12px; }
+  /* visitas a la fábrica: foto ancha con una tarjeta blanca apoyada sobre su borde inferior */
+  .fvis-ph{ position:relative; isolation:isolate; display:block; aspect-ratio:4/3; border-radius:16px; overflow:hidden; background:var(--surface-deep); }
+  @media (min-width:768px){ .fvis-ph{ aspect-ratio:21/9; } }
+  .fvis-ph img{ position:absolute; inset:0; width:100%; height:100%; object-fit:cover; opacity:0; transition:opacity .9s ease; }
+  .fvis-ph img.on{ opacity:1; z-index:2; }
+  .fvis-ph img.under{ opacity:1; z-index:1; transition:none; }
+  .fvis-dots{ position:absolute; z-index:3; right:16px; top:16px; display:flex; gap:8px; }
+  .fvis-dots button{ width:7px; height:7px; padding:0; border:0; border-radius:50%; background:rgba(255,255,255,.5); cursor:pointer; transition:background .3s ease; }
+  .fvis-dots button.on{ background:#fff; }
+  @media (min-width:768px){ .fvis-dots{ top:auto; right:28px; bottom:24px; } }
+  .fvis-card{ position:relative; margin:-48px 12px 0; background:#fff; border-radius:16px; padding:28px 24px 26px; box-shadow:0 10px 40px rgba(51,58,60,.07); }
+  @media (min-width:768px){ .fvis-card{ margin:-150px 0 0 56px; width:min(560px,60%); padding:40px 44px 36px; } }
+  .sec.fvis h2{ margin-top:14px; font-size:clamp(1.6rem,2.4vw,2.1rem); line-height:1.1; }
+  .fvis .intro{ margin-top:14px; text-wrap:pretty; font-size:13.5px; line-height:1.8; font-weight:300; color:var(--muted); }
+  .fvis .arrow{ margin-top:24px; }
 
   /* ---------- Crevillent: año + texto + foto pequeña ---------- */
   .cresec{ padding-block:40px; }
@@ -1023,9 +1038,9 @@
   <section class="wrap sec fpres" id="formacion">
     <span class="fpres-ph"><img loading="lazy" src="academy-fotos/formacion-showroom-madrid.webp" alt="Una formación de Rols en el showroom de Madrid"></span>
     <div>
-      <p class="eyebrow">Rols Academy presencial</p>
-      <h2>Formación en nuestro showroom de Madrid</h2>
-      <p class="intro">En nuestro showroom de Madrid impartimos clases personalizadas, con las muestras en la mano.</p>
+      <p class="eyebrow">Rols Academy · Formación</p>
+      <h2>Formación en la fábrica, en el showroom u online</h2>
+      <p class="intro">Clases personalizadas en tres formatos: en nuestra fábrica de Alicante, en nuestro showroom de Madrid u online.</p>
       <ul>
         <li>
           <p class="who">Empresas</p>
@@ -1038,6 +1053,55 @@
           <a class="arrow" href="mailto:info@rolscarpets.com?subject=Rols%20Academy%20%C2%B7%20Pr%C3%B3xima%20formaci%C3%B3n" target="_blank" rel="noreferrer">Avísame <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><polyline points="9 6 15 12 9 18"></polyline></svg></a>
         </li>
       </ul>
+    </div>
+  </section>
+
+  <!-- ===== ESCUELAS CON LAS QUE HEMOS COLABORADO ===== -->
+  <section class="wrap sec press" id="socios">
+    <div class="socios-head"><p class="eyebrow">Escuelas con las que hemos colaborado</p><span class="rule"></span></div>
+    <div class="marquee">
+      <ul>
+        <li><img src="academy-logos/IADE.svg" alt="IADE"></li>
+        <li><img src="academy-logos/IDEQUO.svg" alt="IDEQUO"></li>
+        <li><img src="academy-logos/BARREIRA.png" alt="Barreira A+D"></li>
+        <li><img src="academy-logos/INSENIA.png" alt="Insenia Design School"></li>
+        <li><img src="academy-logos/IDE.png" alt="IDE Interiorismo"></li>
+        <li aria-hidden="true"><img src="academy-logos/IADE.svg" alt=""></li>
+        <li aria-hidden="true"><img src="academy-logos/IDEQUO.svg" alt=""></li>
+        <li aria-hidden="true"><img src="academy-logos/BARREIRA.png" alt=""></li>
+        <li aria-hidden="true"><img src="academy-logos/INSENIA.png" alt=""></li>
+        <li aria-hidden="true"><img src="academy-logos/IDE.png" alt=""></li>
+        <li aria-hidden="true"><img src="academy-logos/IADE.svg" alt=""></li>
+        <li aria-hidden="true"><img src="academy-logos/IDEQUO.svg" alt=""></li>
+        <li aria-hidden="true"><img src="academy-logos/BARREIRA.png" alt=""></li>
+        <li aria-hidden="true"><img src="academy-logos/INSENIA.png" alt=""></li>
+        <li aria-hidden="true"><img src="academy-logos/IDE.png" alt=""></li>
+        <li aria-hidden="true"><img src="academy-logos/IADE.svg" alt=""></li>
+        <li aria-hidden="true"><img src="academy-logos/IDEQUO.svg" alt=""></li>
+        <li aria-hidden="true"><img src="academy-logos/BARREIRA.png" alt=""></li>
+        <li aria-hidden="true"><img src="academy-logos/INSENIA.png" alt=""></li>
+        <li aria-hidden="true"><img src="academy-logos/IDE.png" alt=""></li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- ===== VISITAS A LA FÁBRICA (lista de espera) ===== -->
+  <section class="wrap sec fvis" id="visitas">
+    <div class="fvis-ph" id="fvis-show">
+      <img class="on" src="academy-fotos/fabrica-telar.webp" alt="Un tejedor trabajando en un telar de la fábrica de Rols en Alicante">
+      <img loading="lazy" src="academy-fotos/fabrica-hilos.webp" alt="El equipo de Rols eligiendo hilos en la fábrica">
+      <img loading="lazy" src="academy-fotos/fabrica-bobina-manos.webp" alt="Manos colocando una bobina de hilo en la fileta">
+      <img loading="lazy" src="academy-fotos/fabrica-bobinas-crudo.webp" alt="Hileras de bobinas de hilo crudo en la fábrica de Rols">
+      <img loading="lazy" src="academy-fotos/fabrica-fileta.webp" alt="Pasillo de la fileta con bobinas de hilo azul">
+      <img loading="lazy" src="academy-fotos/fabrica-bobinas-marron.webp" alt="Bobinas de hilo marrón listas para tejer">
+      <img loading="lazy" src="academy-fotos/fabrica-hilos-telar.webp" alt="Hilos tensados camino del telar">
+      <div class="fvis-dots" aria-label="Fotos de la fábrica"></div>
+    </div>
+    <div class="fvis-card">
+      <p class="eyebrow">Visitas a la fábrica · Alicante</p>
+      <h2>¿Quieres visitar nuestra fábrica?</h2>
+      <p class="intro">Abrimos las puertas de nuestra fábrica para que veas de cerca cómo nace cada alfombra, del hilo al telar. Ven por tu cuenta o con tu estudio: cuéntanos qué te interesa y buscamos juntos el mejor día.</p>
+      <a class="arrow" href="mailto:info@rolscarpets.com?subject=Rols%20Academy%20%C2%B7%20Visita%20a%20la%20f%C3%A1brica" target="_blank" rel="noreferrer">Organiza tu visita<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><polyline points="9 6 15 12 9 18"></polyline></svg></a>
     </div>
   </section>
 
@@ -1151,35 +1215,29 @@
     </div>
   </section>
 
-  <!-- ===== SOCIOS DE LAS FORMACIONES ===== -->
-  <section class="wrap sec press" id="socios">
-    <div class="socios-head"><p class="eyebrow">Socios de las formaciones</p><span class="rule"></span></div>
-    <div class="marquee">
-      <ul>
-        <li><img src="academy-logos/IADE.svg" alt="IADE"></li>
-        <li><img src="academy-logos/IDEQUO.svg" alt="IDEQUO"></li>
-        <li><img src="academy-logos/BARREIRA.png" alt="Barreira A+D"></li>
-        <li><img src="academy-logos/INSENIA.png" alt="Insenia Design School"></li>
-        <li><img src="academy-logos/IDE.png" alt="IDE Interiorismo"></li>
-        <li aria-hidden="true"><img src="academy-logos/IADE.svg" alt=""></li>
-        <li aria-hidden="true"><img src="academy-logos/IDEQUO.svg" alt=""></li>
-        <li aria-hidden="true"><img src="academy-logos/BARREIRA.png" alt=""></li>
-        <li aria-hidden="true"><img src="academy-logos/INSENIA.png" alt=""></li>
-        <li aria-hidden="true"><img src="academy-logos/IDE.png" alt=""></li>
-        <li aria-hidden="true"><img src="academy-logos/IADE.svg" alt=""></li>
-        <li aria-hidden="true"><img src="academy-logos/IDEQUO.svg" alt=""></li>
-        <li aria-hidden="true"><img src="academy-logos/BARREIRA.png" alt=""></li>
-        <li aria-hidden="true"><img src="academy-logos/INSENIA.png" alt=""></li>
-        <li aria-hidden="true"><img src="academy-logos/IDE.png" alt=""></li>
-        <li aria-hidden="true"><img src="academy-logos/IADE.svg" alt=""></li>
-        <li aria-hidden="true"><img src="academy-logos/IDEQUO.svg" alt=""></li>
-        <li aria-hidden="true"><img src="academy-logos/BARREIRA.png" alt=""></li>
-        <li aria-hidden="true"><img src="academy-logos/INSENIA.png" alt=""></li>
-        <li aria-hidden="true"><img src="academy-logos/IDE.png" alt=""></li>
-      </ul>
-    </div>
-  </section>
-
+  <script>
+    // fotos de la fábrica: fundido cada 4 s; la anterior se queda debajo hasta que termina el fundido (sin destello del fondo)
+    (function(){
+      var box=document.getElementById('fvis-show'); if(!box) return;
+      var ims=[].slice.call(box.querySelectorAll('img')), dots=box.querySelector('.fvis-dots'), i=0, t;
+      ims.forEach(function(im,k){
+        var d=document.createElement('button'); d.type='button'; d.setAttribute('aria-label','Foto '+(k+1));
+        if(k===0) d.className='on';
+        d.addEventListener('click',function(){ go(k); play(); });
+        dots.appendChild(d);
+      });
+      var ds=[].slice.call(dots.children);
+      function go(n){
+        if(n===i) return;
+        var old=ims[i]; old.classList.remove('on'); old.classList.add('under');
+        i=(n+ims.length)%ims.length; ims[i].classList.add('on');
+        ds.forEach(function(d,k){ d.classList.toggle('on',k===i); });
+        setTimeout(function(){ old.classList.remove('under'); }, 950);
+      }
+      function play(){ clearInterval(t); if(!matchMedia('(prefers-reduced-motion: reduce)').matches) t=setInterval(function(){ go(i+1); }, 4000); }
+      play();
+    })();
+  </script>
   <script>
     (function(){
       var s=document.getElementById('vcar'); if(!s) return;
